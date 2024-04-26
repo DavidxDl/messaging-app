@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default async function HomePage() {
   const { userId } = auth();
-  let username: string = "";
+  let username = " ";
   if (userId) {
     const user = await currentUser();
     if (user?.username)
