@@ -17,7 +17,7 @@ export default function Messages({ userId, destineId, shouldRefresh }: Props) {
       const mgs: Message[] = await res.json() as Message[];
       setMessages(mgs);
     }
-    getMessages()
+    getMessages().catch(err => console.error(err));
   }, [shouldRefresh])
   return (
     <div className='bg-white w-96 h-96 border-b '>
