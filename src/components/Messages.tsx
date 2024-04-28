@@ -14,7 +14,7 @@ export default function Messages({ userId, destineId, shouldRefresh }: Props) {
   useEffect(() => {
     async function getMessages() {
       const res = await fetch(`/api/friends/${destineId}/messages`);
-      const mgs = await res.json();
+      const mgs: Message[] = await res.json() as Message[];
       setMessages(mgs);
     }
     getMessages()

@@ -3,7 +3,7 @@ import { db } from '~/server/db';
 
 
 export async function POST(request: Request) {
-  const message: Message = await request.json();
+  const message: Message = await request.json() as Message;
   console.log(message);
   await db.message.create({
     data: {

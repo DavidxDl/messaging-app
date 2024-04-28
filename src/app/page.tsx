@@ -34,7 +34,7 @@ export default async function HomePage() {
           <>
             <h1>Welcome {username}! </h1>
             <h2>Friends</h2>
-            <ul>{friends?.map(f => <li ><Link className="hover:font-extrabold text-white" href={`/friends/${f.friends.id}`}>{f.friends.username}</Link></li>)}</ul>
+            <ul>{friends?.map(f => <li key={f.friends.id}><Link className="hover:font-extrabold text-white" href={`/friends/${f.friends.id}`}>{f.friends.username}</Link></li>)}</ul>
             <div className="flex gap-4">
               <SignOutButton >↗ Sign out </SignOutButton>
               <Link href="/user-profile">👤 Account</Link>
