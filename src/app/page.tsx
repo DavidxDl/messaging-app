@@ -26,7 +26,7 @@ export default async function HomePage() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
+    <main >
 
       {!userId && <Link href="/sign-in">Sign in</Link>}
       {
@@ -34,7 +34,7 @@ export default async function HomePage() {
           <>
             <h1>Welcome {username}! </h1>
             <h2>Friends</h2>
-            <ul>{friends?.map(f => <li >{f.friends.username}</li>)}</ul>
+            <ul>{friends?.map(f => <li ><Link className="hover:font-extrabold text-white" href={`/friends/${f.friends.id}`}>{f.friends.username}</Link></li>)}</ul>
             <div className="flex gap-4">
               <SignOutButton >↗ Sign out </SignOutButton>
               <Link href="/user-profile">👤 Account</Link>
