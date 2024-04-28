@@ -1,6 +1,6 @@
 'use client';
-import { Message } from "@prisma/client";
 import { useEffect, useState } from "react";
+import { Message } from "~/lib/modelTypes";
 
 interface Props {
   userId: string;

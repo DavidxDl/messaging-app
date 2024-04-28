@@ -1,6 +1,8 @@
 export interface Message {
-  id: string;
-  message: string;
-  authorId: string;
-  destineId: string;
+  id: string
+  message: string
+  createdAt: Date
+  authorId: string
+  destineId: string
+  author?: { username: string };
 }
