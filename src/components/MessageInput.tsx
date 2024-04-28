@@ -24,9 +24,9 @@ export default function MessageInput({ destineId, authorId, refresh }: Props) {
   }
 
   return (
-    <form method='POST' onSubmit={(e) => {
+    <form method='POST' onSubmit={async (e) => {
       e.preventDefault();
-      onSubmit(message)
+      await onSubmit(message)
     }}>
       <input value={message} onChange={(e) => setMessage(m => e.target.value)} className="flex-grow  outline-none text-black py-2 px-4" type='text' name='message' placeholder='send something!' />
       <input type='submit' value="Send" />
