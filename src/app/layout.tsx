@@ -3,6 +3,7 @@ import { ClerkProvider } from '@clerk/nextjs'
 import { dark } from "@clerk/themes";
 
 import { Inter } from "next/font/google";
+import Navbar from "~/components/Navbar";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -23,7 +24,10 @@ export default function RootLayout({
   return (
     <ClerkProvider appearance={{ baseTheme: dark }}>
       <html lang="en">
-        <body className={`font-sans ${inter.variable}`}>{children}</body>
+        <body className={`font-sans ${inter.variable}`}>
+          <Navbar />
+          {children}
+        </body>
       </html>
     </ClerkProvider>
   );

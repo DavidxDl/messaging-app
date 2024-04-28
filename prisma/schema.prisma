@@ -20,11 +20,12 @@ model User {
 }
 
 model Message {
-  id        String @id @default(uuid())
+  id        String   @id @default(uuid())
   message   String
-  author    User   @relation("messagesSend", fields: [authorId], references: [id])
+  createdAt DateTime @default(now())
+  author    User     @relation("messagesSend", fields: [authorId], references: [id])
   authorId  String
-  sendTo    User   @relation("messagesReceived", fields: [destineId], references: [id])
+  sendTo    User     @relation("messagesReceived", fields: [destineId], references: [id])
   destineId String
 }
 
