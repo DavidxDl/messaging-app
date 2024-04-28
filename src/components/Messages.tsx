@@ -22,7 +22,7 @@ export default function Messages({ userId, destineId, shouldRefresh }: Props) {
   return (
     <div className='bg-white w-96 h-96 border-b '>
       <ul className='overflow-y-scroll text-black flex flex-col justify-end h-full'>
-        {messages?.map(m => <li className={`w-full flex ${m.authorId === userId && 'justify-end'}`}>{m.author?.username + ": " + m.message}</li>)}
+        {messages?.map(m => <li key={m.id} className={`w-full flex ${m.authorId === userId && 'justify-end'}`}>{m.author?.username + ": " + m.message}</li>)}
       </ul>
     </div>
   )
