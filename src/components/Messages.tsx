@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Message } from "~/lib/modelTypes";
 
 interface Props {
@@ -10,6 +10,7 @@ interface Props {
 
 export default function Messages({ userId, destineId, shouldRefresh }: Props) {
   const [messages, setMessages] = useState<Message[]>()
+  const container = useRef<null | HTMLDivElement>(null)
 
   useEffect(() => {
     async function getMessages() {
@@ -19,8 +20,15 @@ export default function Messages({ userId, destineId, shouldRefresh }: Props) {
     }
     getMessages().catch(err => console.error(err));
   }, [shouldRefresh])
+
+  useEffect(() => {
+    if (container.current) {
+      container.current.scrollTop = container.current.scrollHeight;
+      console.log('am scrolling jiggles*')
+    }
+  }, [shouldRefresh])
   return (
-    <div className=" pb-2 px-0.5 rounded-t bg-white w-96 h-96 overflow-auto">
+    <div ref={container} className=" pb-2 px-0.5 rounded-t bg-white w-96 h-96 overflow-auto">
       <ul className=' border-b gap-1  text-black flex flex-col  '>
         {messages?.map(m => (
           <li key={m.id} className={`bg-gradient-to-tr from-red-600 to-sky-600 text-white rounded p-1 flex justify-end ${m.authorId === userId && 'self-end'}`}>
