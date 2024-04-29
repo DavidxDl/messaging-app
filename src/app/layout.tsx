@@ -24,7 +24,8 @@ export default function RootLayout({
   return (
     <ClerkProvider appearance={{ baseTheme: dark }}>
       <html lang="en">
-        <body className={`font-sans ${inter.variable}`}>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <body className={`font-sans ${inter.variable} h-svh flex flex-col`}>
           <Navbar />
           {children}
         </body>

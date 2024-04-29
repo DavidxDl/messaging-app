@@ -12,7 +12,7 @@ interface Props {
 export default function Chat({ userId, destineId }: Props) {
   const [shouldRefresh, setShouldRefresh] = useState(false);
   return (
-    <div className='flex flex-col'>
+    <div className=' flex flex-col'>
       <Messages userId={userId} destineId={destineId} shouldRefresh={shouldRefresh} />
       <MessageInput authorId={userId} destineId={destineId} refresh={() => setShouldRefresh(e => !e)} />
     </div>
