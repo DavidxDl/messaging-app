@@ -43,7 +43,7 @@ export default async function HomePage() {
             <>
               <div className="flex gap-2 items-center">
                 <h1>Welcome {username}!</h1>
-                <Avatar imageUrl={user?.imageUrl!} />
+                <Avatar imageUrl={imageUrl} />
 
               </div>
               <h2>Friends</h2>
