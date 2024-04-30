@@ -17,6 +17,7 @@ model User {
   friendOf         Friendship[] @relation("friendsOf")
   MessagesSend     Message[]    @relation("messagesSend")
   MessagesReceived Message[]    @relation("messagesReceived")
+  imgUrl           String       @default("")
 }
 
 model Message {

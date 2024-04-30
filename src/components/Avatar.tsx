@@ -1,8 +1,13 @@
 import React from 'react'
 
-export default function Avatar({ imageURl }: { imageURl: string }) {
+interface Props {
+  imageUrl: string;
+  className?: string
+}
+
+export default function Avatar({ imageUrl, className }: Props) {
   return (
-    <img src={imageURl} className='w-10 rounded-full' />
+    <img src={imageUrl} className={`w-7 rounded-full ${className}`} />
   )
 }
 
