@@ -1,7 +1,7 @@
 import React from 'react'
 
 interface Props {
-  imageUrl: string;
+  imageUrl: string | undefined;
   className?: string
 }
 
