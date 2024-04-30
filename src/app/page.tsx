@@ -27,7 +27,7 @@ export default async function HomePage() {
       await db.user.create({ data: { id: userId, username: username, imgUrl: imageUrl } })
     } else {
       friends = await db.friendship.findMany({ where: { friendOfId: userId }, select: { friends: true } })
-      friendOf = await db.friendship.findMany({ where: { friendId: userId }, select: { friends: true } })
+      friendOf = await db.friendship.findMany({ where: { friendId: userId }, select: { friendOf: true } })
       console.log(friends)
     }
 
@@ -49,7 +49,7 @@ export default async function HomePage() {
               <h2>Friends</h2>
               <ul>{friends?.map(f => <li key={f.friends.id}><Link className="hover:font-extrabold text-white" href={`/friends/${f.friends.id}`}>{f.friends.username}</Link></li>)}</ul>
               <h2>Friend Of</h2>
-              <ul>{friendOf?.map(f => <li key={f.friends.id}><Link className="hover:font-extrabold text-white" href={`/friends/${f.friends.id}`}>{f.friends.username}</Link></li>)}</ul>
+              <ul>{friendOf?.map(f => <li key={f.friendOf.id}><Link className="hover:font-extrabold text-white" href={`/friends/${f.friendOf.id}`}>{f.friendOf.username}</Link></li>)}</ul>
               <div className="flex gap-4">
                 <SignOutButton >↗ Sign out </SignOutButton>
                 <Link href="/user-profile">👤 Account</Link>
