@@ -27,7 +27,7 @@ export default function SearchBar({ friends, userId }: Props) {
     const controller = new AbortController();
     async function getResults() {
       const res = await fetch(`/api/users/${friendSearch}`, { signal: controller.signal });
-      const data = await res.json();
+      const data = await res.json() as User[];
       console.log(data)
 
       setResults(data)
