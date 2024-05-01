@@ -69,16 +69,16 @@ export default function SearchBar({ friends, userId }: Props) {
         className='p-2 rounded-full outline-none max-w-48 transition-all focus:max-w-80'
       />
       {friendSearch !== '' &&
-        <div className='absolute top-14 bg-white flex right-0 left-0 justify-center rounded'>
+        <ul className='absolute top-14 bg-white flex flex-col max-h-80 right-0 left-0 justify-center rounded'>
           {results.map(r => (
-            <div key={r.id} className='flex gap-2'>
+            <li key={r.id} className='flex justify-between'>
               {r.username}
               {friends.length === 0 || friends.some(f => f.friends.id !== r.id)
                 ? <button onClick={async () => await addFriend(r.id, userId)}>Add Friend</button>
                 : <Link href={`/friends/${r.id}`}>Send Message</Link>}
-            </div>
+            </li>
           ))}
-        </div>}
+        </ul>}
     </div>
   )
 }
