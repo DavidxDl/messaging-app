@@ -1,16 +1,22 @@
-import { SignInButton, SignOutButton } from '@clerk/nextjs';
+import { RedirectToSignIn, SignInButton, SignOutButton } from '@clerk/nextjs';
 import { auth, currentUser } from '@clerk/nextjs/server'
 import Link from 'next/link';
-import React from 'react'
 import Avatar from './Avatar';
+import SearchBar from './SearchBar';
+import { db } from '~/server/db';
 
 export default async function Navbar() {
   const { userId } = auth();
-  const user = await currentUser()
+  if (!userId)
+    return <RedirectToSignIn />
+
+  const user = await currentUser();
+  const friends = await db.friendship.findMany({ where: { friendOfId: userId }, select: { friends: true } })
 
   return (
     <nav className='flex justify-between bg-slate-900 w-full py-4 px-2'>
       <Link href="/" className='font-extrabold text-white text-xl'>Messaging App</Link>
+      <SearchBar friends={friends} userId={userId} />
       {!!userId && (
         <div className='flex gap-4 items-center'>
           {<Link href="/user-profile" className='hover:font-extrabold text-white flex items-center gap-1'>

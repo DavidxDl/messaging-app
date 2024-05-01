@@ -1,4 +1,4 @@
-import { SignOutButton } from "@clerk/nextjs";
+import { RedirectToSignIn, SignOutButton } from "@clerk/nextjs";
 import { User, auth, currentUser } from "@clerk/nextjs/server";
 import { db } from "~/server/db";
 import Link from "next/link";
@@ -15,8 +15,13 @@ export default async function HomePage() {
     user = await currentUser();
 
 
-    if (user?.username)
+    if (!user)
+      return <RedirectToSignIn />
+
+    if (user.username)
       username = user.username;
+    else
+      username = user.fullName!
     if (user?.imageUrl)
       imageUrl = user.imageUrl
 
