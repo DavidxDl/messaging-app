@@ -55,20 +55,22 @@ export default async function HomePage() {
             </div>
           </div>
           <hr className="w-full m-4" />
-          <h1 className="text-xl self-start my-3 ">Friends</h1>
-          <ul>{friends?.map(f =>
-            <li key={f.friends.id}>
-              <Link className="flex gap-2 items-center hover:font-extrabold text-white" href={`/friends/${f.friends.id}`}>
-                <Avatar imageUrl={f.friends.imgUrl} />
-                <div className="flex items-center gap-1">
-                  <span className="text-xl">{f.friends.phrase}</span>
-                  <span className="opacity-75">@{f.friends.username}</span>
-                  <Status status={f.friends.status} />
-                </div>
-              </Link>
-            </li>)}
-          </ul>
+          <div className="self-start flex flex-col bg-black rounded-xl p-2 h-full max-w-96 overflow-hidden flex-nowrap">
+            <h1 className="text-xl self-start my-3 ">Friends</h1>
+            <ul>{friends?.map(f =>
+              <li key={f.friends.id}>
+                <Link className="flex gap-2 items-center hover:font-extrabold text-white" href={`/friends/${f.friends.id}`}>
+                  <Avatar imageUrl={f.friends.imgUrl} />
+                  <div className="flex items-center gap-1">
+                    <span className="text-xl">{f.friends.phrase}</span>
+                    <span className="opacity-75">@{f.friends.username}</span>
+                    <Status status={f.friends.status} />
+                  </div>
+                </Link>
+              </li>)}
+            </ul>
 
+          </div>
         </div>
       </main >
     );
