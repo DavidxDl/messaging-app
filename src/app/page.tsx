@@ -6,6 +6,7 @@ import Status from "~/components/Status";
 import SearchBar from "~/components/SearchBar";
 import FriendList from "~/components/FriendList";
 import UserStatus from "~/components/UserStatus";
+import PhraseBtn from "~/components/PhraseBtn";
 
 export default async function HomePage() {
   const { userId } = auth();
@@ -53,6 +54,7 @@ export default async function HomePage() {
             <div className="flex flex-col">
               {!!userExist.phrase && <span className="text-xl font-extrabold">{userExist.phrase}</span>}
               <span className="">@{username} <UserStatus id={userId} status={userExist.status} /> </span>
+              <PhraseBtn id={userId} />
             </div>
           </div>
           <hr className="w-full m-4" />

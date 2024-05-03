@@ -43,6 +43,8 @@ export default function SearchBar({ friends, userId }: Props) {
   }, [friendSearch])
 
   async function addFriend(friendId: string, userId: string) {
+    if (friendSearch === "")
+      return
     try {
       const res = await fetch(`/api/friendship/${friendId}`,
         {
