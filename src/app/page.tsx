@@ -1,10 +1,10 @@
-import { RedirectToSignIn, SignOutButton } from "@clerk/nextjs";
+import { RedirectToSignIn } from "@clerk/nextjs";
 import { User, auth, currentUser } from "@clerk/nextjs/server";
 import { db } from "~/server/db";
-import Link from "next/link";
 import Avatar from "~/components/Avatar";
 import Status from "~/components/Status";
 import SearchBar from "~/components/SearchBar";
+import FriendList from "~/components/FriendList";
 
 export default async function HomePage() {
   const { userId } = auth();
@@ -55,22 +55,7 @@ export default async function HomePage() {
             </div>
           </div>
           <hr className="w-full m-4" />
-          <div className="self-start flex flex-col bg-black rounded-xl p-2 h-full max-w-96 overflow-hidden flex-nowrap">
-            <h1 className="text-xl self-start my-3 ">Friends</h1>
-            <ul>{friends?.map(f =>
-              <li key={f.friends.id}>
-                <Link className="flex gap-2 items-center hover:font-extrabold text-white" href={`/friends/${f.friends.id}`}>
-                  <Avatar imageUrl={f.friends.imgUrl} />
-                  <div className="flex items-center gap-1">
-                    <span className="text-xl">{f.friends.phrase}</span>
-                    <span className="opacity-75">@{f.friends.username}</span>
-                    <Status status={f.friends.status} />
-                  </div>
-                </Link>
-              </li>)}
-            </ul>
-
-          </div>
+          {friends && <FriendList friends={friends} />}
         </div>
       </main >
     );
