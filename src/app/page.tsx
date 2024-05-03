@@ -5,6 +5,7 @@ import Avatar from "~/components/Avatar";
 import Status from "~/components/Status";
 import SearchBar from "~/components/SearchBar";
 import FriendList from "~/components/FriendList";
+import UserStatus from "~/components/UserStatus";
 
 export default async function HomePage() {
   const { userId } = auth();
@@ -51,7 +52,7 @@ export default async function HomePage() {
             <Avatar imageUrl={user.imageUrl} className="min-w-20 grow" />
             <div className="flex flex-col">
               {!!userExist.phrase && <span className="text-xl font-extrabold">{userExist.phrase}</span>}
-              <span className="">@{username} <Status status={userExist.status} /> </span>
+              <span className="">@{username} <UserStatus id={userId} status={userExist.status} /> </span>
             </div>
           </div>
           <hr className="w-full m-4" />
