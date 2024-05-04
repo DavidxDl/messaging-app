@@ -69,7 +69,7 @@ export default function SearchBar({ friends, userId }: Props) {
     <div className='relative'>
       <input
         onFocus={() => setIsFocus(true)}
-        onBlur={() => setIsFocus(false)}
+        
         type='search'
         placeholder='Search for Friends..'
         value={friendSearch}
