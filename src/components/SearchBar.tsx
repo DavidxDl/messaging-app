@@ -76,7 +76,7 @@ export default function SearchBar({ friends, userId }: Props) {
         onChange={(e) => setFriendSearch(s => e.target.value)}
         className='text-black p-2 rounded-full outline-none max-w-48 transition-all focus:max-w-80'
       />
-      {friendSearch !== '' && isFocus && < ul className='absolute top-14 bg-white flex flex-col max-h-80 right-0 left-0 justify-center rounded'>
+      {friendSearch !== '' && isFocus && < ul className='absolute overflow-y-scroll pt-4 top-14 bg-white flex flex-col max-h-80 right-0 left-0 justify-center rounded'>
         {results.map(r => (
           <li key={r.id} className='flex justify-between text-black'>
             {r.username}
