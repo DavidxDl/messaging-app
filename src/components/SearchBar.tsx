@@ -36,7 +36,7 @@ export default function SearchBar({ friends, userId }: Props) {
 
   useEffect(() => {
     window.addEventListener("click", (e) => {
-      if (searchWrapper.current && !searchWrapper.current.contains(e.target)) {
+      if (searchWrapper.current && !searchWrapper.current.contains(e.target as Node)) {
         setIsFocus(false);
       }
     })
