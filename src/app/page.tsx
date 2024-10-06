@@ -47,7 +47,7 @@ export default async function HomePage() {
       <main className="gap-2">
 
         {friends && <SearchBar friends={friends} userId={userId} />}
-        <div className="flex flex-col items-center bg-slate-950 rounded-xl p-3 max-h-[33rem] md:min-w-[70%] grow">
+        <div className="flex flex-col items-center bg-slate-950 rounded-xl p-3 max-h-[44rem] md:max-h-[33rem] md:min-w-[70%] grow">
 
           <div className="flex gap-3 ">
             <Avatar imageUrl={user.imageUrl} className="min-w-20 grow" />
