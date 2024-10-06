@@ -44,26 +44,24 @@ export default function SearchBar({ friends, userId }: Props) {
 
   useEffect(() => {
     const controller = new AbortController();
-    (async () => {
-      try {
-        if (!friendSearch) return;
-        const res = await fetch(`/api/users/${friendSearch}`, { signal: controller.signal });
+    async function getResults() {
+      if (!friendSearch) return;
+      const res = await fetch(`/api/users/${friendSearch}`, { signal: controller.signal });
 
-        if (!res.ok) {
-          throw new Error("Fetching Friends request didnt go as plan :(");
-        }
-
-        const data = await res.json() as User[];
-
-        setResults(data)
-
-      } catch (err) {
-        if (err instanceof DOMException && err.name !== "AbortError") {
-          console.error("Error trying to fetch friends", err);
-        }
+      if (!res.ok) {
+        throw new Error("Fetching Friends request didnt go as plan :(");
       }
 
-    })();
+      const data = await res.json() as User[];
+
+      setResults(data)
+    }
+    getResults().catch(err => {
+      if (err instanceof DOMException && err.name !== 'AbortError') {
+        console.error("couldnt handle request to friend Search", err)
+      }
+
+    })
 
     return () => {
       controller.abort();
