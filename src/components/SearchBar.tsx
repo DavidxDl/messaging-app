@@ -44,7 +44,7 @@ export default function SearchBar({ friends, userId }: Props) {
 
   useEffect(() => {
     const controller = new AbortController();
-    async function getResults() {
+    (async () => {
       try {
         if (!friendSearch) return;
         const res = await fetch(`/api/users/${friendSearch}`, { signal: controller.signal });
@@ -57,14 +57,13 @@ export default function SearchBar({ friends, userId }: Props) {
 
         setResults(data)
 
-      } catch (err: any) {
-        if (err.name !== "AbortError") {
+      } catch (err) {
+        if (err instanceof DOMException && err.name !== "AbortError") {
           console.error("Error trying to fetch friends", err);
         }
       }
 
-    }
-    getResults();
+    })();
 
     return () => {
       controller.abort();
