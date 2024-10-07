@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 main {
-  @apply min-h-dvh pb-5 flex flex-col items-center md:justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white
+  @apply min-h-[91.5dvh] md:min-h-[89vh] pb-5 flex flex-col items-center md:justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white
 }
