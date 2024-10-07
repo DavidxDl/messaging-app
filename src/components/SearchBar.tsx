@@ -30,6 +30,7 @@ const friendsIcon = <svg xmlns="http://www.w3.org/2000/svg" width="20" height="2
 export default function SearchBar({ friends, userId }: Props) {
   const router = useRouter()
   const [isFocus, setIsFocus] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [friendSearch, setFriendSearch] = useState("")
   const [results, setResults] = useState<User[]>([])
   const searchWrapper = useRef<null | HTMLDivElement>(null)
@@ -46,6 +47,8 @@ export default function SearchBar({ friends, userId }: Props) {
     const controller = new AbortController();
     async function getResults() {
       if (!friendSearch) return;
+
+      setIsLoading(true);
       const res = await fetch(`/api/users/${friendSearch}`, { signal: controller.signal });
 
       if (!res.ok) {
@@ -55,6 +58,7 @@ export default function SearchBar({ friends, userId }: Props) {
       const data = await res.json() as User[];
 
       setResults(data)
+      setIsLoading(false)
     }
     getResults().catch(err => {
       if (err instanceof DOMException && err.name !== 'AbortError') {
@@ -95,7 +99,6 @@ export default function SearchBar({ friends, userId }: Props) {
     <div className='relative' ref={searchWrapper}>
       <input
         onFocus={() => setIsFocus(true)}
-        onBlur={(e) => console.log(e)}
 
         type='search'
         placeholder='Search for Friends..'
@@ -104,15 +107,21 @@ export default function SearchBar({ friends, userId }: Props) {
         className='text-black p-2 rounded-full outline-none transition-all max-w-80 mt-5'
       />
       {friendSearch !== '' && isFocus && (
-        < ul className='absolute overflow-y-scroll  top-14 bg-white flex flex-col max-h-80 right-0 left-0 justify-center rounded-xl pt-5 mt-2 px-2'>
-          {results.map(r => (
-            <li key={r.id} className='flex justify-between text-black'>
-              {r.username}
-              {friends.find(f => f.friends.username === r.username)
-                ? <Link href={`/friends/${r.id}`}>💬</Link>
-                : <button className="flex items-center" onClick={async () => await addFriend(r.id, userId)}>+{friendsIcon}</button>}
-            </li>
-          ))}
+        < ul className={`absolute overflow-y-scroll text-black  top-14 bg-white flex flex-col max-h-80 right-0 left-0 justify-center rounded-xl ${isLoading ? 'py-2' : 'pt-5'} mt-2 px-2`}>
+          {isLoading
+            ? <div className='w-8 h-8 rounded-full border-t-2 animate-spin border-t-blue-400 py-4 self-center'></div>
+            : results.length
+              ? results.map(r => (
+                <li key={r.id} className='flex justify-between text-black'>
+                  {r.username}
+                  {friends.find(f => f.friends.username === r.username)
+                    ? <Link href={`/friends/${r.id}`}>💬</Link>
+                    : <button className="flex items-center" onClick={async () => await addFriend(r.id, userId)}>+{friendsIcon}</button>}
+                </li>
+              ))
+
+              : <p className='text-center text-black'>no results</p>
+          }
         </ul>)}
     </div >
   )
