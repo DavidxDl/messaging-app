@@ -107,7 +107,7 @@ export default function SearchBar({ friends, userId }: Props) {
         className='text-black p-2 rounded-full outline-none transition-all max-w-80 mt-5'
       />
       {friendSearch !== '' && isFocus && (
-        < ul className={`absolute overflow-y-scroll text-black  top-14 bg-white flex flex-col max-h-80 right-0 left-0 justify-center rounded-xl ${isLoading ? 'py-2' : 'pt-5'} mt-2 px-2`}>
+        < ul className={`absolute overflow-y-scroll text-black  top-14 bg-white flex flex-col max-h-80 right-0 left-0 justify-start rounded-xl  mt-2 px-2`}>
           {isLoading
             ? <div className='w-8 h-8 rounded-full border-t-2 animate-spin border-t-blue-400 py-4 self-center'></div>
             : results.length
